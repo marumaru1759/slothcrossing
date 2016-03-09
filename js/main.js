@@ -2,24 +2,28 @@ enchant ();
 
 
 window.onload = function () {
-    var game = new Game(320,320);
+    var game = new Game(420,320);
     game.preload('asset/sloth.png');
+    game.preload('asset/hitsuji_nation.mp3');
     game.fps = 30;
     
     game.onload = function(){
 
-    // create start menu
+    // create start menu & play start music
+    game.assets['asset/hitsuji_nation.mp3'].play();
     var startscene = new Scene();
     
-    startscene.backgroundColor = "#FFFFFF";
+    startscene.backgroundColor = "#4169e1";
         // Title Logo
         var titlelogo = new Label("Sloth Crossing");
         titlelogo.x = 100;
         titlelogo.y = 50;
+        titlelogo.font = "36px palatino";
 
         var startmsg = new Label("Click screen to start game");
-        startmsg.x = 80;
-        startmsg.y = 80;
+        startmsg.x = 100;
+        startmsg.y = 120;
+        startmsg.font = "20px palatino";
 
         startscene.addChild(titlelogo);
         startscene.addChild(startmsg);
@@ -31,7 +35,8 @@ window.onload = function () {
     
     var sprite = new Sprite(64, 51);
     sprite.image = game.assets['asset/sloth.png'];
-    sprite.x = 100; sprite.y=100;
+    sprite.x = 20; sprite.y=150;
+    sprite.scaleX = -1;
     firststage.addChild(sprite);
 
         // to control sloth
@@ -55,6 +60,7 @@ window.onload = function () {
     // transferred from title to first stage
     startscene.addEventListener('touchstart',function(){
         game.replaceScene(firststage);
+        game.assets['asset/hitsuji_nation.mp3'].stop();
     });   
 
 
